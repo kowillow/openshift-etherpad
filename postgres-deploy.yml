@@ -21,7 +21,7 @@ spec:
             limits:
               memory: 512Mi
           name: postgresql
-          image: postgresql
+          image: postgres:10
           env:
             - name: POSTGRESQL_USER
               valueFrom:
