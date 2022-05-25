@@ -12,4 +12,4 @@ spec:
   dataSource:
     kind: VolumeSnapshot
     apiGroup: snapshot.storage.k8s.io
-    name: snapshotToReplace
+    name: <snapshot_to_replace>
