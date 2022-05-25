@@ -4,6 +4,42 @@ metadata:
   name: postgresql
   labels:
     app: etherpad_db
+parameters:
+- name: NAME
+  description: Name of the DC, service, route
+  required: true
+  value: etherpad
+- name: ADMIN_PASSWORD
+  description: Admin password for etherpad/admin
+  required: true
+- name: DB_TYPE
+  description: Database Type (postgres, mysql)
+  value: postgres
+  required: true
+- name: DB_HOST
+  description: Database host
+  value: postgresql
+  required: true
+- name: DB_PORT
+  description: Database Port
+  value: "5432"
+  required: true
+- name: DB_DATABASE
+  description: Database Name
+  value: ether
+  required: true
+- name: DB_USER
+  description: Database User ID
+  value: ether
+  required: true
+- name: DB_PASS
+  description: Database Password
+  value: ether
+  required: true
+- name: ETHERPAD_IMAGE
+  description: Etherpad Image to be used
+  value: "quay.io/gpte-devops-automation/etherpad:latest"
+  required: true
 spec:
   strategy:
     type: Recreate
