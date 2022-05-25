@@ -1,0 +1,48 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: postgresql
+  labels:
+    app: etherpad_db
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    name: postgresql
+  template:
+    metadata:
+      labels:
+        name: postgresql
+    spec:
+      containers:
+        - resources:
+            limits:
+              memory: 512Mi
+          name: postgresql
+          image: postgresql:10
+          env:
+            - name: POSTGRESQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: database-user
+            - name: POSTGRESQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: database-password
+            - name: POSTGRESQL_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: postgresql
+                  key: database-name
+          ports:
+            - containerPort: 5432
+              protocol: TCP
+          volumeMounts:
+            - name: postgresql-data
+              mountPath: /var/lib/pgsql/data
+      volumes:
+        - name: postgresql-data
+          persistentVolumeClaim:
+            claimName: postgresql-pv-claim
