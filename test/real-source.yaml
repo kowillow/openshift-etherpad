@@ -843,7 +843,7 @@ spec:
               protocol: TCP
           volumeMounts:
             - name: postgresql-data
-              mountPath: /var/lib/pgsql/data
+              mountPath: /var/lib/pgsql/data/pgdata
       volumes:
         - name: postgresql-data
           persistentVolumeClaim:
