@@ -21,7 +21,28 @@ spec:
             limits:
               memory: 512Mi
           name: postgresql
-          image: postgres:10
+          image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:d006800f4f5fc2db85caf46b84f2da3b32f309f55c475f78f1e30388028a584c
+          imagePullPolicy: IfNotPresent
+          readinessProbe:
+            exec:
+              command:
+                - /usr/libexec/check-container
+            initialDelaySeconds: 5
+            timeoutSeconds: 1
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
+          terminationMessagePath: /dev/termination-log
+          livenessProbe:
+            exec:
+              command:
+                - /usr/libexec/check-container
+                - '--live'
+            initialDelaySeconds: 120
+            timeoutSeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 3
           env:
             - name: POSTGRESQL_USER
               valueFrom:
