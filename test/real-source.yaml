@@ -800,7 +800,7 @@ spec:
             limits:
               memory: 512Mi
           name: postgresql
-          image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql@sha256:d006800f4f5fc2db85caf46b84f2da3b32f309f55c475f78f1e30388028a584c
+          image: image-registry.openshift-image-registry.svc:5000/openshift/postgresql:latest
           imagePullPolicy: IfNotPresent
           readinessProbe:
             exec:
